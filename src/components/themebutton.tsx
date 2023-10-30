@@ -1,6 +1,5 @@
 import { useTheme } from "@/providers/theme";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import React from "react";
 
 type Props = {
   className?: string;

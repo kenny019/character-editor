@@ -1,4 +1,3 @@
-import React from "react";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
