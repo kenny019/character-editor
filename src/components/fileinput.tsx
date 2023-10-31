@@ -21,7 +21,7 @@ const FileInput = () => {
       if (inputFile.type === "application/json") {
         const fileData = reader.result as string;
 
-        const V2ParseRes = safeParseToV2(fileData);
+        const V2ParseRes = safeParseToV2(JSON.parse(fileData));
 
         if (!V2ParseRes.success) {
           // add toast
@@ -67,7 +67,6 @@ const FileInput = () => {
 
     if (inputFile.type === "application/json") {
       reader.readAsText(inputFile);
-      // safeParseToV2();
     } else {
       reader.readAsArrayBuffer(inputFile);
     }
