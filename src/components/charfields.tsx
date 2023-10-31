@@ -41,7 +41,12 @@ const CharacterFields = () => {
           <div className="space-y-2">
             <Label>Image</Label>
             {card.imageBuffer ? (
-              <div>image</div>
+              <img
+                src={URL.createObjectURL(
+                  new Blob([card.imageBuffer], { type: "image/png" })
+                )}
+                className="h-[300px] w-[200px] rounded-md border object-cover"
+              />
             ) : (
               <div className="h-[300px] w-[200px] rounded-md border border-dashed"></div>
             )}
