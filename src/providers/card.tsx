@@ -8,11 +8,13 @@ type CardProviderProps = {
 type CardProviderState = {
   card?: Character;
   setCard?: (cardData: Character) => void;
+  tokens?: string[];
 };
 
 const initialState: CardProviderState = {
   card: undefined,
   setCard: () => null,
+  tokens: [],
 };
 
 const CardProviderContext = createContext<CardProviderState>(initialState);
@@ -20,10 +22,20 @@ const CardProviderContext = createContext<CardProviderState>(initialState);
 export function CardProvider({ children, ...props }: CardProviderProps) {
   const [card, setCard] = useState<Character>();
 
+  const tokens = useMemo(
+    () => card?.tokens(),
+    [
+      card?.characterData.data.description,
+      card?.characterData.data.mes_example,
+      card?.characterData.data.first_mes,
+    ]
+  );
+
   const value = useMemo(
     () => ({
       card,
       setCard,
+      tokens,
     }),
     [card]
   );

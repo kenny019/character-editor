@@ -7,7 +7,7 @@ const Header = () => {
       <p className="text-xl font-semibold">Character Editor</p>
       <div className="flex space-x-4 text-muted-foreground">
         <GitHubLogoIcon className="h-4 w-4 cursor-pointer hover:text-primary" />
-        <ThemeButton className=" h-4 w-4 cursor-pointer transition-all hover:rotate-180 hover:text-primary" />
+        <ThemeButton className="h-4 w-4 cursor-pointer transition-all hover:rotate-180 hover:text-primary" />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import { V2 } from "character-card-utils";
+import llamaTokenizer from "llama-tokenizer-js";
 
 function InitCharacterV2(): V2 {
   return {
@@ -38,5 +39,16 @@ export class Character {
     } else {
       this.characterData = InitCharacterV2();
     }
+  }
+
+  public tokens(field?: string) {
+    if (!field) {
+      const { description, first_mes, mes_example } = this.characterData.data;
+      const prompt = `${description}\n${first_mes}\n${mes_example}`;
+      return llamaTokenizer.encode(prompt) as string[];
+    }
+
+    const data = this.characterData.data;
+    return llamaTokenizer.encode(data[field as keyof typeof data]) as string[];
   }
 }

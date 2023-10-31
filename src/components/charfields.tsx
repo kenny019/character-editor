@@ -2,12 +2,26 @@ import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useCard } from "@/providers/card";
+import { klona } from "klona/lite";
 
 const CharacterFields = () => {
-  const { card } = useCard();
+  const { card, setCard } = useCard();
 
-  if (!card || !card?.characterData) {
+  if (!card || !card.characterData) {
     return <div>An error has occurred.</div>;
+  }
+
+  function modifyCardData(
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) {
+    if (!card || !setCard) return;
+
+    const clonedCard = klona(card);
+    Object.assign(clonedCard.characterData.data, {
+      [event.currentTarget.id]: event.currentTarget.value,
+    });
+
+    setCard(clonedCard);
   }
 
   return (
@@ -16,10 +30,11 @@ const CharacterFields = () => {
         <div className="space-y-2">
           {/* name */}
           <div className="space-y-2">
-            <Label htmlFor="character-name">Name</Label>
+            <Label htmlFor="name">Name</Label>
             <Input
-              id="character-name"
+              id="name"
               defaultValue={card.characterData.data.name}
+              onChange={modifyCardData}
             />
           </div>
           {/* image */}
@@ -34,10 +49,11 @@ const CharacterFields = () => {
           </div>
           {/* version */}
           <div className="space-y-2">
-            <Label htmlFor="character-version">Version</Label>
+            <Label htmlFor="character_version">Version</Label>
             <Input
-              id="character-version"
+              id="character_version"
               defaultValue={card.characterData.data.character_version}
+              onChange={modifyCardData}
             />
           </div>
           {/* creator */}
@@ -47,42 +63,55 @@ const CharacterFields = () => {
           </div>
           {/* creator notes */}
           <div className="space-y-2">
-            <Label htmlFor="author-notes">Creator Notes</Label>
+            <Label htmlFor="creator_notes">Creator Notes</Label>
             <Textarea
               rows={5}
-              id="author-notes"
+              id="creator_notes"
               defaultValue={card.characterData.data.creator_notes}
+              onChange={modifyCardData}
             />
           </div>
         </div>
         <div className="mt-2 space-y-2">
           {/* description */}
-          <div className="flex h-[calc(50%-4px)] flex-col space-y-2">
-            <Label htmlFor="character-description">Description</Label>
+          <div className="flex h-[calc(50%-4px)] flex-col">
+            <Label htmlFor="description">Description</Label>
             <Textarea
-              id="character-description"
-              className="h-full w-full"
+              id="description"
+              className="mt-2 h-full w-full"
               defaultValue={card.characterData.data.description}
+              onChange={modifyCardData}
             />
+            <p className="text-end text-xs">
+              {card.tokens("description").length}
+            </p>
           </div>
           {/* first message */}
           <div className="flex h-[calc(50%-4px)] flex-col space-y-2">
-            <Label htmlFor="character-first-msg">First Message</Label>
+            <Label htmlFor="first_mes">First Message</Label>
             <Textarea
-              id="character-first-msg"
+              id="first_mes"
               className="h-full w-full"
               defaultValue={card.characterData.data.first_mes}
+              onChange={modifyCardData}
             />
+            <p className="text-end text-xs">
+              {card.tokens("first_mes").length}
+            </p>
           </div>
         </div>
         <div className="space-y-2">
           {/* example message */}
-          <Label htmlFor="character-example-msg">Example Message</Label>
+          <Label htmlFor="mes_example">Example Message</Label>
           <Textarea
-            id="character-example-msg"
+            id="mes_example"
             className="min-h-[300px] w-full lg:min-h-[700px] xl:min-h-[700px]"
             defaultValue={card.characterData.data.mes_example}
+            onChange={modifyCardData}
           />
+          <p className="text-end text-xs">
+            {card.tokens("mes_example").length}
+          </p>
         </div>
       </div>
     </div>
