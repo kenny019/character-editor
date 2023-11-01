@@ -3,6 +3,8 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useCard } from "@/providers/card";
 import { klona } from "klona/lite";
+import Tiptap from "./tiptap";
+import ImageInput from "./imageinput";
 
 const CharacterFields = () => {
   const { card, setCard } = useCard();
@@ -29,7 +31,7 @@ const CharacterFields = () => {
       <div className="grid h-full grid-cols-3 gap-6">
         <div className="space-y-2">
           {/* name */}
-          <div className="space-y-2">
+          <div key={`${card.uniqueId}-name`} className="space-y-2">
             <Label htmlFor="name">Name</Label>
             <Input
               id="name"
@@ -38,22 +40,12 @@ const CharacterFields = () => {
             />
           </div>
           {/* image */}
-          <div className="space-y-2">
+          <div className="space-y-2" key={`${card.uniqueId}-image`}>
             <Label>Image</Label>
-            {card.imageBuffer ? (
-              <img
-                src={URL.createObjectURL(
-                  new Blob([card.imageBuffer], { type: "image/png" })
-                )}
-                className="h-[300px] w-[200px] rounded-md border object-cover"
-              />
-            ) : (
-              <div className="h-[300px] w-[200px] rounded-md border border-dashed"></div>
-            )}
-            <div></div>
+            <ImageInput />
           </div>
           {/* version */}
-          <div className="space-y-2">
+          <div key={`${card.uniqueId}-character_version`} className="space-y-2">
             <Label htmlFor="character_version">Version</Label>
             <Input
               id="character_version"
@@ -62,57 +54,58 @@ const CharacterFields = () => {
             />
           </div>
           {/* creator */}
-          <div className="space-y-2">
+          <div className="space-y-2" key={`${card.uniqueId}-creator`}>
             <Label htmlFor="author">Creator</Label>
             <Input id="author" defaultValue={card.characterData.data.creator} />
           </div>
           {/* creator notes */}
-          <div className="space-y-2">
+          <div className="space-y-2" key={`${card.uniqueId}-creator_notes`}>
             <Label htmlFor="creator_notes">Creator Notes</Label>
             <Textarea
-              rows={5}
               id="creator_notes"
               defaultValue={card.characterData.data.creator_notes}
               onChange={modifyCardData}
+              rows={4}
             />
           </div>
         </div>
         <div className="mt-2 space-y-2">
           {/* description */}
-          <div className="flex h-[calc(50%-4px)] flex-col">
+          <div
+            key={`${card.uniqueId}-description`}
+            className="flex h-[calc(50%-2px)] flex-col"
+          >
             <Label htmlFor="description">Description</Label>
-            <Textarea
+            <Tiptap
               id="description"
-              className="mt-2 h-full w-full"
               defaultValue={card.characterData.data.description}
-              onChange={modifyCardData}
             />
             <p className="text-end text-xs">
               {card.tokens("description").length}
             </p>
           </div>
           {/* first message */}
-          <div className="flex h-[calc(50%-4px)] flex-col space-y-2">
+          <div
+            key={`${card.uniqueId}-first_mes`}
+            className="flex h-[calc(50%-2px)] flex-col space-y-2"
+          >
             <Label htmlFor="first_mes">First Message</Label>
-            <Textarea
+            <Tiptap
               id="first_mes"
-              className="h-full w-full"
               defaultValue={card.characterData.data.first_mes}
-              onChange={modifyCardData}
             />
             <p className="text-end text-xs">
               {card.tokens("first_mes").length}
             </p>
           </div>
         </div>
-        <div className="space-y-2">
+        <div key={`${card.uniqueId}-mes_example`} className="space-y-2">
           {/* example message */}
           <Label htmlFor="mes_example">Example Message</Label>
-          <Textarea
+          <Tiptap
             id="mes_example"
             className="min-h-[300px] w-full lg:min-h-[700px] xl:min-h-[700px]"
             defaultValue={card.characterData.data.mes_example}
-            onChange={modifyCardData}
           />
           <p className="text-end text-xs">
             {card.tokens("mes_example").length}

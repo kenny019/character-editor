@@ -7,7 +7,7 @@ type CardProviderProps = {
 
 type CardProviderState = {
   card?: Character;
-  setCard?: (cardData: Character) => void;
+  setCard?: (cardData?: Character) => void;
   tokens?: string[];
 };
 

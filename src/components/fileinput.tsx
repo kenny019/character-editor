@@ -6,25 +6,51 @@ import { Character } from "@/lib/character";
 import exifr from "exifr";
 import { Buffer } from "buffer";
 import { safeParseToV2 } from "character-card-utils";
-import { fixChubBookEntires } from "@/lib/utils";
+import { fixChubBookEntries, safeJSONParse } from "@/lib/utils";
+import { useToast } from "./ui/use-toast";
 
 const FileInput = () => {
+  const { toast } = useToast();
   const { setCard } = useCard();
 
   const onDrop = useCallback((file: File[]) => {
     // const reader = new FileReader()
     const inputFile = file[0];
+    if (!inputFile || !inputFile.type) {
+      toast({
+        title: "Invalid File Format",
+        description: `Only .png and .json file formats are supported currently.`,
+        variant: "destructive",
+      });
+    }
 
     const reader = new FileReader();
+
     reader.onload = async () => {
       // todo: refactor
       if (inputFile.type === "application/json") {
         const fileData = reader.result as string;
 
-        const V2ParseRes = safeParseToV2(JSON.parse(fileData));
+        const JSONParseRes = safeJSONParse(fileData);
+
+        if (!JSONParseRes.success) {
+          toast({
+            title: "Invalid Character File",
+            description: `Invalid JSON format for ${inputFile.name}`,
+            variant: "destructive",
+          });
+          return;
+        }
+
+        const V2ParseRes = safeParseToV2(JSONParseRes.data);
 
         if (!V2ParseRes.success) {
           // add toast
+          toast({
+            title: "Invalid Character File",
+            description: `Unable to get character data from ${inputFile.name}`,
+            variant: "destructive",
+          });
           console.error(V2ParseRes.error);
           return;
         }
@@ -41,17 +67,32 @@ const FileInput = () => {
 
       const fileData = reader.result as ArrayBuffer;
       const exif = await exifr.parse(fileData);
-
-      const decodedExifData = JSON.parse(
+      const JSONParseRes = safeJSONParse<Record<string, unknown>>(
         Buffer.from(exif.chara, "base64").toString()
       );
 
-      const toParseData = fixChubBookEntires(decodedExifData);
+      if (!JSONParseRes.success) {
+        toast({
+          title: "Invalid Character File",
+          description: `Invalid JSON format for ${inputFile.name}`,
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const decodedExifData = JSONParseRes.data;
+
+      const toParseData = fixChubBookEntries(decodedExifData);
 
       console.log(toParseData);
       const V2ParseRes = safeParseToV2(toParseData);
 
       if (!V2ParseRes.success) {
+        toast({
+          title: "Invalid Character Card",
+          description: `Unable to get character data from ${inputFile.name}`,
+          variant: "destructive",
+        });
         console.error(V2ParseRes.error);
         return;
       }

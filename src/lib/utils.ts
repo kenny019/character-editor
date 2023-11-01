@@ -19,7 +19,7 @@ const V2CardCharBookSchema = z.object({
   }),
 });
 
-export function fixChubBookEntires(data: Record<string, unknown>) {
+export function fixChubBookEntries(data: Record<string, unknown>) {
   const V2CardCharRes = V2CardCharBookSchema.safeParse(data);
 
   if (!V2CardCharRes.success) return data;
@@ -45,4 +45,35 @@ export function fixChubBookEntires(data: Record<string, unknown>) {
     });
 
   return cardData;
+}
+
+type JSONParseResSuccess<T> = {
+  success: true;
+  data: T;
+  error: undefined;
+};
+
+type JSONParseResFail = {
+  success: false;
+  data: undefined;
+  error: unknown;
+};
+
+export function safeJSONParse<T>(
+  input: string
+): JSONParseResSuccess<T> | JSONParseResFail {
+  try {
+    const data = JSON.parse(input) as T;
+    return {
+      success: true,
+      data,
+      error: undefined,
+    };
+  } catch (err) {
+    return {
+      success: false,
+      error: err,
+      data: undefined,
+    };
+  }
 }
