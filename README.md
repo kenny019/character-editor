@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# Character Editor
 
 Open sourced AI Character Playground.
 
@@ -13,6 +13,7 @@ To create a tool that aids in creating AI character cards.
 - WYSIWYG Editor
 - Clientsided
 - Supports multiple frontends.
+- Syntax highlighting for RP.
 - `png` and `json` formats.
 - LLM integration (planned)
 - Chat format preview (planned)
