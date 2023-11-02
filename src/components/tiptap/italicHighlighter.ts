@@ -1,7 +1,7 @@
 import { Extension } from "@tiptap/react";
 import { Plugin } from "@tiptap/pm/state";
 
-import findItalic from "./findItalic.js";
+import findItalic from "./findItalic";
 
 export const italicHighlighter = Extension.create({
   name: "italicHighlighter",

@@ -1,7 +1,7 @@
 import { Extension } from "@tiptap/react";
 import { Plugin } from "@tiptap/pm/state";
 
-import findQuotes from "./findQuotes.js";
+import findQuotes from "./findQuotes";
 
 export const quotesHighlighter = Extension.create({
   name: "quotesHighlighter",

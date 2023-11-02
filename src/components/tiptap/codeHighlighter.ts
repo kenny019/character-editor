@@ -1,7 +1,6 @@
 import { Extension } from "@tiptap/react";
 import { Plugin } from "@tiptap/pm/state";
-
-import findCode from "./findCode.js";
+import findCode from "./findCode";
 
 export const codeHighlighter = Extension.create({
   name: "codeHighlighter",
