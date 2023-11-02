@@ -84,6 +84,28 @@ const CharacterFields = () => {
               {card.tokens("description").length}
             </p>
           </div>
+          {/* scenario */}
+          <div className="flex flex-col" key={`${card.uniqueId}-scenario`}>
+            <Label htmlFor="scenario">Scenario</Label>
+            <Tiptap
+              id="scenario"
+              defaultValue={card.characterData.data.scenario}
+            />
+            <p className="text-end text-xs">{card.tokens("scenario").length}</p>
+          </div>
+          {/* personality */}
+          <div className="flex flex-col" key={`${card.uniqueId}-personality`}>
+            <Label htmlFor="personality">Personality</Label>
+            <Tiptap
+              id="personality"
+              defaultValue={card.characterData.data.personality}
+            />
+            <p className="text-end text-xs">
+              {card.tokens("personality").length}
+            </p>
+          </div>
+        </div>
+        <div className="space-y-2">
           {/* first message */}
           <div
             className="flex h-[calc(50%-2px)] flex-col"
@@ -98,10 +120,11 @@ const CharacterFields = () => {
               {card.tokens("first_mes").length}
             </p>
           </div>
-        </div>
-        <div className="space-y-2">
           {/* example message */}
-          <div key={`${card.uniqueId}-mes_example`} className="space-y-2">
+          <div
+            key={`${card.uniqueId}-mes_example`}
+            className="flex h-[calc(50%-2px)] flex-col"
+          >
             <Label htmlFor="mes_example">Example Message</Label>
             <Tiptap
               id="mes_example"

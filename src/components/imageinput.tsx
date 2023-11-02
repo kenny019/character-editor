@@ -59,7 +59,7 @@ const ImageInput = () => {
         />
       ) : (
         <div
-          className="flex min-h-[300px] max-w-[200px] cursor-pointer rounded-md border border-dashed text-center"
+          className="flex min-h-[300px] max-w-[200px] cursor-pointer items-center justify-center rounded-md border border-dashed text-center"
           {...getRootProps()}
         >
           {isDragActive && <p>Drop image here...</p>}

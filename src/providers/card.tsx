@@ -28,6 +28,8 @@ export function CardProvider({ children, ...props }: CardProviderProps) {
       card?.characterData.data.description,
       card?.characterData.data.mes_example,
       card?.characterData.data.first_mes,
+      card?.characterData.data.scenario,
+      card?.characterData.data.personality,
     ]
   );
 

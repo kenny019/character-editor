@@ -46,8 +46,9 @@ export class Character {
 
   public tokens(field?: string) {
     if (!field) {
-      const { description, first_mes, mes_example } = this.characterData.data;
-      const prompt = `${description}\n${first_mes}\n${mes_example}`;
+      const { description, first_mes, mes_example, personality, scenario } =
+        this.characterData.data;
+      const prompt = `${description}\n${first_mes}\n${personality}\n${scenario}\n${mes_example}`;
       return llamaTokenizer.encode(prompt) as string[];
     }
 
