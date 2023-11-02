@@ -27,7 +27,7 @@ const CharacterFields = () => {
   }
 
   return (
-    <div className="flex flex-col space-y-4">
+    <div className="flex h-full flex-col space-y-4">
       <div className="grid h-full grid-cols-3 gap-6">
         <div className="space-y-2">
           {/* name */}
@@ -72,8 +72,8 @@ const CharacterFields = () => {
         <div className="mt-2 space-y-2">
           {/* description */}
           <div
-            key={`${card.uniqueId}-description`}
             className="flex h-[calc(50%-2px)] flex-col"
+            key={`${card.uniqueId}-description`}
           >
             <Label htmlFor="description">Description</Label>
             <Tiptap
@@ -86,8 +86,8 @@ const CharacterFields = () => {
           </div>
           {/* first message */}
           <div
+            className="flex h-[calc(50%-2px)] flex-col"
             key={`${card.uniqueId}-first_mes`}
-            className="flex h-[calc(50%-2px)] flex-col space-y-2"
           >
             <Label htmlFor="first_mes">First Message</Label>
             <Tiptap
@@ -99,17 +99,18 @@ const CharacterFields = () => {
             </p>
           </div>
         </div>
-        <div key={`${card.uniqueId}-mes_example`} className="space-y-2">
+        <div className="space-y-2">
           {/* example message */}
-          <Label htmlFor="mes_example">Example Message</Label>
-          <Tiptap
-            id="mes_example"
-            className="min-h-[300px] w-full lg:min-h-[700px] xl:min-h-[700px]"
-            defaultValue={card.characterData.data.mes_example}
-          />
-          <p className="text-end text-xs">
-            {card.tokens("mes_example").length}
-          </p>
+          <div key={`${card.uniqueId}-mes_example`} className="space-y-2">
+            <Label htmlFor="mes_example">Example Message</Label>
+            <Tiptap
+              id="mes_example"
+              defaultValue={card.characterData.data.mes_example}
+            />
+            <p className="text-end text-xs">
+              {card.tokens("mes_example").length}
+            </p>
+          </div>
         </div>
       </div>
     </div>

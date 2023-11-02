@@ -61,7 +61,7 @@ const Tiptap = ({ defaultValue, id, className }: Props) => {
     <>
       <EditorContent
         className={cn(
-          "my-2 flex h-full max-h-[320px] overflow-hidden p-1",
+          "my-2 flex h-full w-full resize-y overflow-hidden p-1",
           className
         )}
         editor={editor}

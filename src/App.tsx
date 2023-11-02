@@ -25,7 +25,7 @@ function App() {
             {card ? (
               <>
                 <ActionBar />
-                <div className="grid h-full w-full grid-cols-[1fr_350px] items-stretch gap-6 px-4 pb-4">
+                <div className="grid h-full max-h-[80vh] w-full grid-cols-[1fr_350px] items-stretch gap-6 overflow-y-auto px-4 pb-4">
                   <CharacterFields />
                   <ChatPreview />
                 </div>

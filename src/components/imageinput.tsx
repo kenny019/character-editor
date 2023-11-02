@@ -54,12 +54,12 @@ const ImageInput = () => {
           src={URL.createObjectURL(
             new Blob([card.imageBuffer], { type: "image/png" })
           )}
-          className="h-[300px] w-[200px] cursor-pointer rounded-md border object-cover"
+          className="flex h-full max-h-[300px] w-full max-w-[200px] cursor-pointer rounded-md border object-cover"
           {...getRootProps()}
         />
       ) : (
         <div
-          className="flex h-[300px] w-[200px] cursor-pointer flex-col rounded-md border border-dashed"
+          className="flex min-h-[300px] max-w-[200px] cursor-pointer rounded-md border border-dashed text-center"
           {...getRootProps()}
         >
           {isDragActive && <p>Drop image here...</p>}
