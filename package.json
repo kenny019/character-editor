@@ -16,6 +16,7 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "@radix-ui/react-toggle": "^1.0.3",
     "@tiptap/extension-document": "^2.1.12",
     "@tiptap/extension-paragraph": "^2.1.12",
     "@tiptap/extension-text": "^2.1.12",
@@ -38,7 +39,6 @@
     "remark": "^15.0.1",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
-    "tiptap-markdown": "^0.8.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {

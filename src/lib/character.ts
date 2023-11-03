@@ -49,10 +49,10 @@ export class Character {
       const { description, first_mes, mes_example, personality, scenario } =
         this.characterData.data;
       const prompt = `${description}\n${first_mes}\n${personality}\n${scenario}\n${mes_example}`;
-      return llamaTokenizer.encode(prompt) as string[];
+      return llamaTokenizer.encode(prompt) as number[];
     }
 
     const data = this.characterData.data;
-    return llamaTokenizer.encode(data[field as keyof typeof data]) as string[];
+    return llamaTokenizer.encode(data[field as keyof typeof data]) as number[];
   }
 }

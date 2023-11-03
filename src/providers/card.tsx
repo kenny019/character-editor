@@ -8,7 +8,7 @@ type CardProviderProps = {
 type CardProviderState = {
   card?: Character;
   setCard?: (cardData?: Character) => void;
-  tokens?: string[];
+  tokens?: number[];
 };
 
 const initialState: CardProviderState = {

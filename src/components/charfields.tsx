@@ -1,4 +1,3 @@
-import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { useCard } from "@/providers/card";
@@ -61,24 +60,20 @@ const CharacterFields = () => {
           {/* creator notes */}
           <div className="space-y-2" key={`${card.uniqueId}-creator_notes`}>
             <Label htmlFor="creator_notes">Creator Notes</Label>
-            <Textarea
+            <Tiptap
               id="creator_notes"
               defaultValue={card.characterData.data.creator_notes}
-              onChange={modifyCardData}
-              rows={4}
             />
           </div>
         </div>
-        <div className="mt-2 space-y-2">
+        <div className="space-y-2">
           {/* description */}
-          <div
-            className="flex h-[calc(50%-2px)] flex-col"
-            key={`${card.uniqueId}-description`}
-          >
+          <div key={`${card.uniqueId}-description`}>
             <Label htmlFor="description">Description</Label>
             <Tiptap
               id="description"
               defaultValue={card.characterData.data.description}
+              tokenize
             />
             <p className="text-end text-xs">
               {card.tokens("description").length}
@@ -90,6 +85,7 @@ const CharacterFields = () => {
             <Tiptap
               id="scenario"
               defaultValue={card.characterData.data.scenario}
+              tokenize
             />
             <p className="text-end text-xs">{card.tokens("scenario").length}</p>
           </div>
@@ -99,6 +95,7 @@ const CharacterFields = () => {
             <Tiptap
               id="personality"
               defaultValue={card.characterData.data.personality}
+              tokenize
             />
             <p className="text-end text-xs">
               {card.tokens("personality").length}
@@ -107,28 +104,24 @@ const CharacterFields = () => {
         </div>
         <div className="space-y-2">
           {/* first message */}
-          <div
-            className="flex h-[calc(50%-2px)] flex-col"
-            key={`${card.uniqueId}-first_mes`}
-          >
+          <div key={`${card.uniqueId}-first_mes`}>
             <Label htmlFor="first_mes">First Message</Label>
             <Tiptap
               id="first_mes"
               defaultValue={card.characterData.data.first_mes}
+              tokenize
             />
             <p className="text-end text-xs">
               {card.tokens("first_mes").length}
             </p>
           </div>
           {/* example message */}
-          <div
-            key={`${card.uniqueId}-mes_example`}
-            className="flex h-[calc(50%-2px)] flex-col"
-          >
+          <div key={`${card.uniqueId}-mes_example`}>
             <Label htmlFor="mes_example">Example Message</Label>
             <Tiptap
               id="mes_example"
               defaultValue={card.characterData.data.mes_example}
+              tokenize
             />
             <p className="text-end text-xs">
               {card.tokens("mes_example").length}

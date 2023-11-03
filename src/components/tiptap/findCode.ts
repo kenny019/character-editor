@@ -15,7 +15,7 @@ export default function (doc: Node): DecorationSet {
       const from = position + index;
       const to = from + match[0].length;
       const decoration = Decoration.inline(from, to, {
-        class: "bg-muted text-muted-foreground px-1 rounded-md",
+        class: "bg-muted text-muted-foreground px-1 rounded-sm",
       });
 
       decorations.push(decoration);

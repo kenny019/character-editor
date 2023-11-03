@@ -1,5 +1,10 @@
 import FileSaver from "file-saver";
-import { FileIcon, ImageIcon, PlusIcon } from "@radix-ui/react-icons";
+import {
+  DownloadIcon,
+  FileIcon,
+  ImageIcon,
+  PlusIcon,
+} from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import { useCard } from "@/providers/card";
 import { Character } from "@/lib/character";
@@ -62,43 +67,6 @@ const ActionBar = () => {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-        {/* export  */}
-        <DropdownMenu>
-          <DropdownMenuTrigger>Export</DropdownMenuTrigger>
-          <DropdownMenuContent className="min-w-[0px]">
-            <DropdownMenuItem
-              onClick={() => {
-                if (!card.imageBuffer) {
-                  toast({
-                    title: "Error saving as image",
-                    description:
-                      "Please upload an image to use as the character card before saving.",
-                    variant: "destructive",
-                  });
-                  return;
-                }
-                FileSaver.saveAs(
-                  ExportCharacter(card, true),
-                  `${card.characterData.data.name}.png`
-                );
-              }}
-              className="gap-1"
-            >
-              Image <ImageIcon />
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                FileSaver.saveAs(
-                  ExportCharacter(card),
-                  `${card.characterData.data.name}.json`
-                )
-              }
-              className="gap-1"
-            >
-              JSON <FileIcon />
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
         {/* new */}
         <AlertDialog>
           <AlertDialogTrigger asChild>
@@ -127,6 +95,47 @@ const ActionBar = () => {
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+        {/* export  */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button size="sm">
+              Export <DownloadIcon className="ml-1 h-3 w-3" />{" "}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="min-w-[0px]">
+            <DropdownMenuItem
+              onClick={() => {
+                if (!card.imageBuffer) {
+                  toast({
+                    title: "Error saving as image",
+                    description:
+                      "Please upload an image to use as the character card before saving.",
+                    variant: "destructive",
+                  });
+                  return;
+                }
+                FileSaver.saveAs(
+                  ExportCharacter(card, true),
+                  `${card.characterData.data.name}.png`
+                );
+              }}
+              className="gap-1 text-xs"
+            >
+              Image <ImageIcon className="h-3 w-3" />
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                FileSaver.saveAs(
+                  ExportCharacter(card),
+                  `${card.characterData.data.name}.json`
+                )
+              }
+              className="gap-1 text-xs"
+            >
+              JSON <FileIcon className="h-3 w-3" />
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   );
