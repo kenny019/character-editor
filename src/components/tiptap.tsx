@@ -54,6 +54,9 @@ const Tiptap = ({ defaultValue, id, className, tokenize }: Props) => {
   const editorSettings = {
     extensions: extensions,
     content: defaultValue,
+    parseOptions: {
+      preserveWhitespace: "full",
+    },
     editorProps: {
       attributes: {
         class:
@@ -76,12 +79,16 @@ const Tiptap = ({ defaultValue, id, className, tokenize }: Props) => {
   const tokenizedEditorSettings = {
     extensions: extensionsTokenized,
     content: defaultValue,
+    parseOptions: {
+      preserveWhitespace: "full",
+    },
     editorProps: {
       attributes: {
         class:
           "focus:outline-none flex flex-col w-full rounded-t-none rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 overflow-auto",
       },
     },
+
     onUpdate: async ({ editor }: { editor: Editor }) => {
       if (!card || !setCard) return;
 
